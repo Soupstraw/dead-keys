@@ -1,0 +1,41 @@
+* Ideas
+** Only one tutorial level, try to complete achievements and find secrets
+** Only one boss fight
+** Only one button, rhythm game where you control a cube on ice and every beat the movement vector rotates 90 degrees. Press space to move in that direction.
+*** One button rhythm golf
+** You can do only one thing at a time
+** Only one of each keyboard key
+*** Each tile on map is assigned a key, press that key to make your character hop to that tile
+*** Try to lure monsters onto tiles where you can jump on
+*** Bullet hell.
+*** Some squares have items that you can use:
+**** Bombs that you can throw on squares
+**** Potions that restore dead keys
+**** Arrows you can shoot in some direction
+
+* Todo list
+** DONE Implement character movement
+   CLOSED: [2019-08-03 Sat 15:03]
+** TODO Animations
+** TODO Sound effects
+** DONE Implement tiles dropping
+   CLOSED: [2019-08-03 Sat 15:03]
+** TODO Tutorial!!
+** TODO Implement level generation
+** TODO Implement level over
+** Implement enemies
+*** DONE Implement an enemy that jumps from key to key
+    CLOSED: [2019-08-03 Sat 17:40]
+*** TODO Implement simple bouncing enemy
+*** TODO Implement simple aim shooting enemy
+*** TODO Implement an enemy that shoots in all directions at once
+** Implement items
+*** TODO Implement bomb
+*** TODO Implement key recovery potion
+*** TODO Implement bow
+    
+* Playtesting
+** Animations too slow (when jumping to nearby keys)
+** Jumping to nearby keys is a good strategy(??)
+** Attacks need better feedback
+

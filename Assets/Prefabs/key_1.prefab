@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keycode: 
   alive: 1
+  occupied: 0
   dropSpeed: 3
+  blinkColor: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 0}
 --- !u!95 &1714093879832024966
 Animator:
   serializedVersion: 3

@@ -11,12 +11,16 @@ public class Key : MonoBehaviour
     public bool occupied = false;
     public float dropSpeed = 3.0f;
 
+    public Color blinkColor;
+
     private Animator anim;
+    private Vector3 startPos;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        startPos = transform.position;
     }
 
     // Update is called once per frame
@@ -34,6 +38,28 @@ public class Key : MonoBehaviour
     public void Drop(){
         alive = false;
         StartCoroutine(DropCoroutine());
+    }
+
+    public void Restore(){
+        alive = true;
+        transform.position = startPos;
+        StartCoroutine(BlinkCoroutine());
+    }
+
+    private IEnumerator BlinkCoroutine(){
+        SpriteRenderer rend = GetComponentInChildren<SpriteRenderer>();
+        rend.color = blinkColor;
+        yield return new WaitForSeconds(0.5f);
+        rend.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        rend.color = blinkColor;
+        yield return new WaitForSeconds(0.5f);
+        rend.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        rend.color = blinkColor;
+        yield return new WaitForSeconds(0.5f);
+        rend.color = Color.white;
+        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator DropCoroutine(){

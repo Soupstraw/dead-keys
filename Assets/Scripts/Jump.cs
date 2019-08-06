@@ -9,13 +9,16 @@ public class Jump : MonoBehaviour
     public enum PlayerState{
         IDLE,
         JUMPING,
-        THROWING
+        DEAD
     }
 
     public float jumpTime = 0.5f;
     public PlayerState state = PlayerState.IDLE;
     public Key currentKey = null;
     public Key nextKey = null;
+
+    public Color deathColor;
+    public AudioClip hitSound;
 
     public SpriteRenderer sprite;
     public AudioClip jumpSound;
@@ -46,7 +49,26 @@ public class Jump : MonoBehaviour
     }
 
     public void Hit(){
-        Debug.Log("Player hit!");
+        StartCoroutine(HitCoroutine());
+    }
+
+    IEnumerator HitCoroutine(){
+        AudioSource.PlayClipAtPoint(hitSound, transform.position);
+        Time.timeScale = 0.5f;
+        sprite.color = deathColor;
+        sprite.flipY = true;
+        state = PlayerState.DEAD;
+        Vector3 moveVec = new Vector3(Random.Range(-1f, 1f), 3f);
+        float shakeIntensity = 1f;
+        ScreenShake shake = FindObjectOfType<ScreenShake>();
+        while(transform.position.y > -3f){
+            transform.position += moveVec * Time.deltaTime;
+            moveVec += Vector3.down * Time.deltaTime * 10;
+            shakeIntensity -= Time.deltaTime;
+            shake.intensity = Mathf.Clamp01(shakeIntensity);
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
     private IEnumerator JumpToCoroutine(Vector3 targetPos){

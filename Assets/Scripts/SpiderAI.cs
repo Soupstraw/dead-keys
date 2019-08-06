@@ -11,10 +11,13 @@ public class SpiderAI : MonoBehaviour
 
     public Key currentKey = null;
 
+    private Enemy enemy;
+
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpiderCoroutine());
+        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
@@ -23,9 +26,16 @@ public class SpiderAI : MonoBehaviour
 
     }
 
+    void OnDisable(){
+        if(currentKey != null)
+            currentKey.occupied = false;
+    }
+
     IEnumerator SpiderCoroutine(){
         yield return new WaitForSeconds(1);
         while(true){
+            if(enemy.dead)
+                yield break;
             Jump p = FindObjectOfType<Jump>();
             Key target = GameObject.FindObjectsOfType<Key>()
                 .Where(k => k.alive && !k.occupied && Vector3.Distance(transform.position, k.transform.position) <= 1)
@@ -47,6 +57,8 @@ public class SpiderAI : MonoBehaviour
         float time = 0;
         float dist = 999999;
         do{
+            if(enemy.dead)
+                yield break;
             time += Time.deltaTime;
             dist = Vector3.Distance(transform.position, targetPos);
             transform.position = Vector3.Lerp(startPos, targetPos, time/jumpTime);
